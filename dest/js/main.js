@@ -1,72 +1,91 @@
 $(function(){
-	// $(this).on('keyup', function(){
-	// 	$('span.event-name-msg').text("I can't Wait!!!"); 
-	// 	$('#eventname').closest('div').removeClass('has-error'); 		
-	// 	$('#eventname').closest('div').addClass('has-success'); 
-	// });
 
-	// $(this).on('keyup', function(){
-	// 	$('span.event-name-msg').text('');
-	// 	if($('#eventname').val() != ''){
-	// 		$('span.nameresponse').removeClass('glyphicon-remove');
-	// 		$('span.nameresponse').addClass('glyphicon-ok');
-	// 		$('#eventname').closest('div').removeClass('has-error'); 
-	// 		$('#eventname').closest('div').addClass('has-success'); 
-	// 	} else {
-	// 		$('span.nameresponse').addClass('glyphicon-remove');
-	// 		$('#eventname').closest('div').removeClass('has-success'); 
-	// 		$('#eventname').closest('div').addClass('has-error'); 
-	// 		$('span.event-name-msg').text("Parties need names homie."); 
-	// 	}
-	// 	$('span.nameresponse').css('visibility', 'visible'); 
-	// });
-
+	/* 
+	*** Create a function to interact with users filling out the form. ***
+	*/ 
 	function testinput(messageblock, response, id, responsetext){
-		$(messageblock).text(''); // messageblock
-		if($(id).val() != ''){ // id
-			$(response).removeClass('glyphicon-remove'); // response
-			$(response).addClass('glyphicon-ok'); // response
-			$(id).closest('div').removeClass('has-error'); // id
-			$(id).closest('div').addClass('has-success'); // id
+		$(messageblock).text(''); 
+		if($(id).val() != ''){ 
+			$(response).removeClass('glyphicon-remove'); 
+			$(response).addClass('glyphicon-ok'); 
+			$(id).closest('div').removeClass('has-error');
+			$(id).closest('div').addClass('has-success'); 
 		} else {
-			$(response).addClass('glyphicon-remove'); // response
-			$(id).closest('div').removeClass('has-success'); // id
-			$(id).closest('div').addClass('has-error'); // id
-			$(messageblock).text(responsetext); //messageblock 
+			$(response).addClass('glyphicon-remove'); 
+			$(id).closest('div').removeClass('has-success'); 
+			$(id).closest('div').addClass('has-error'); 
+			$(messageblock).text(responsetext);
 		}
-		$(response).css('visibility', 'visible'); // response
+		$(response).css('visibility', 'visible'); 
 	}
+	/* 
+	*** Test the input for every form field on focusout ***
+	*/ 
 	// Event Name
-	$('#eventname').on('keyup', function(){
+	$('#eventname').on('focusout', function(){
 		testinput('span.event-name-msg', 'span.nameresponse', '#eventname', 'Parties need names homie.');
 	});
 	// Event Type
-	$('#eventtype').on('keyup', function(){
+	$('#eventtype').on('focusout', function(){
 		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'Should I wear my birthday suit?'); 
 	});
 	// Event Host
-	$('#eventhost').on('keyup', function(){
+	$('#eventhost').on('focusout', function(){
 		testinput('span.event-host-msg', 'span.whoresponse', '#eventhost', 'Take me to your leader!'); 
 	});
 	// Start Date / Time
-	$('#startdate').on('keyup', function(){
-		testinput('span.event-start-msg', 'span.startdateresponse', '#startdate', 'I don\'t wanna be late.'); 
+	$('#startdate').on('focusout', function(){
+		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate'); 
+	});
+	$('#starttime').on('focusout', function(){
+		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
 	});
 	// End Date / Time
-	$('#enddate').on('keyup', function(){
-		testinput('span.event-end-msg', 'span.enddateresponse', '#enddate', 'Every new beginning comes from some other beginning\'s end'); 
+	$('#enddate').on('focusout', function(){
+		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
+	});
+	$('#endtime').on('focusout', function(){
+		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
 	});
 	// Event Details
-	$('#eventdeets').on('keyup', function(){
+	$('#eventdeets').on('focusout', function(){
 		testinput('span.event-details-msg', 'span.deetresponse', '#eventdeets', 'Gimme the deets!'); 
 	});
 	// Event Location
-	$('#location').on('keyup', function(){
+	$('#location').on('focusout', function(){
 		testinput('span.event-location-msg', 'span.locationfeedback', '#location', 'Where we goin?'); 
 	});
 
-
 });
+'use strict'
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical location types.
+  autocomplete = new google.maps.places.Autocomplete(
+    (document.getElementById('location')),
+    {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address fields in the form.
+  autocomplete.addListener('place_changed', function(){
+    var place = autocomplete.getPlace(); 
+  });
+}
+
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
 'use strict'
 
 console.log("this file will contain the logic for the new member form, but it doesn't quite yet.");
