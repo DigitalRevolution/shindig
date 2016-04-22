@@ -3,7 +3,7 @@
 <div class = "col-md-3"></div>
 <div class = "col-xs-12 col-md-6">
 
-<form autocomplete = "on" action="">
+<form autocomplete = "on" action="" id = "newShindig">
 
 <div class="form-group has-feedback">
 	<label class = "control-label" for="eventname">What shall we call this shindig?</label>
@@ -69,6 +69,8 @@
 	<span class="glyphicon locationfeedback glyphicon-ok form-control-feedback"></span>
 	<span class= "event-location-msg"></span>
 </div>
+
+<input type = "submit" value = "Let's Party">
 
 
 </form>
