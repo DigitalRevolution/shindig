@@ -1,6 +1,7 @@
 /* Added CSS */
 body {
-  color: #fafafa; }
+  color: #fafafa;
+  background-color: #f2f2f2; }
 
 .form-control-feedback {
   visibility: hidden; }
