@@ -19,7 +19,8 @@ var shindigdb = new Firebase('https://shindig.firebaseio.com/');
 		shindig.location = $('#location').val();
 
 		shindigdb.push(shindig, function(){
-			console.log(shindig);
+		
+		$("input[type=text], input[type=date], input[type=time], textarea").val("");
 		});
 	}); 
 });
