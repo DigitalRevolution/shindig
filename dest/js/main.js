@@ -1,3 +1,4 @@
+'use strict'
 $(function(){
 
 	/* 
@@ -78,11 +79,13 @@ var shindigdb = new Firebase('https://shindig.firebaseio.com/');
 		shindig.location = $('#location').val();
 
 		shindigdb.push(shindig, function(){
-			console.log(shindig);
+		
+		$("input[type=text], input[type=date], input[type=time], textarea").val("");
 		});
 	}); 
 });
 'use strict'
+var autocomplete; 
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical location types.
   autocomplete = new google.maps.places.Autocomplete(
