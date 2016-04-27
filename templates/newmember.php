@@ -9,7 +9,7 @@
 	<input type="text" class="form-control" id="name" placeholder = "Name" autofocus>
 	<span class="glyphicon newnameresponse form-control-feedback"></span>
 	<span class ="name-msg"></span>
-</div>	
+</div>
 
 <div class="form-group has-feedback">
 	<label class = "control-label" for="email">What is your email address?</label>
