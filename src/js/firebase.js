@@ -1,3 +1,4 @@
+'use strict';
 $(function(){
 
 // Create Firebase Connection
