@@ -1,7 +1,6 @@
 'use strict'
 $(function(){
-
-	// NAME TEST
+	// NAME TEST //
 	function testinput(messageblock, response, id, responsetext){
 		$(messageblock).text(''); 
 		if($(id).val() != ''){ 
@@ -17,12 +16,12 @@ $(function(){
 		}
 		$(response).css('visibility', 'visible'); 
 	}
-	// RUN NAME TEST 
+	// RUN NAME TEST //
 	$('#name').on('focusout', function(){
 		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface.');
 	});
 
-	// EMAIL TEST 
+	// EMAIL TEST //
 	function isEmail(email){
 	 	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			return regex.test(email); 
@@ -45,7 +44,7 @@ $(function(){
 		$('span.emailresponse').css('visibility', 'visible'); 	
 	});
 
-	// PASSWORD ONE TEST
+	// PASSWORD ONE TEST //
 	function testPassword(password){
 		var result = "pass"; 
 		var output = "<ul>"; 
@@ -96,21 +95,20 @@ $(function(){
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
 	};
-	// RUN PASSWORD ONE TEST
+	// RUN PASSWORD ONE TEST //
 	$('#password').on('keyup', function(){
 		var password = $('#password').val();
 		testPassword(password);
 	})
 
-	// PASSWORD TWO TEST 
+	// PASSWORD TWO TEST //
 	function testPasswordTwo(){
 		var result = "fail";
-		if( $('#password').val() === $('#password2').val() ) {
+		if( $('#password').val() === $('#password2').val() && $('#password2').val() != '') {
 			result = "pass"; 
 		}
 		passTwoResponse(result);
 	}
-
 	function passTwoResponse(result){
 		$('span.password2-msg').text(''); 
 		if(result === "pass"){ 
@@ -131,6 +129,4 @@ $(function(){
 	$('#password2').on('keyup', function(){
 		testPasswordTwo(); 
 	});
-
-
 });

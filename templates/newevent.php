@@ -1,4 +1,4 @@
-<?php include('./templates/header.html'); ?>
+<?php include('./header.html'); ?>
 
 <div class = "col-md-3"></div>
 <div class = "col-xs-12 col-md-6">
@@ -77,4 +77,4 @@
 
 </div>
 <div class = "col-md-3"></div>
-<?php include('./templates/footer.html'); ?>
+<?php include('./footer.html'); ?>
