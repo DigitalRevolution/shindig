@@ -96,6 +96,31 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 			window.location = "../";
 		});
 	});
+
+	shindigdb.once("value", function(snapshot) {
+		var output = "<div>"; 
+	  	snapshot.forEach(function(childSnapshot) {
+	    	var shindig = childSnapshot.val();
+	    	console.log(shindig.name);
+	    	console.log(shindig.type);
+	    	console.log(shindig.host);
+	    	console.log(shindig.startDate + " at " + shindig.startTime);
+	    	console.log(shindig.endDate + " at " + shindig.endTime);
+	    	console.log(shindig.details);
+	    	console.log(shindig.location);
+	   		output += shindig.name;
+	   		output += shindig.type;
+	   		output += shindig.host;
+	   		output += shindig.startDate + " at " + shindig.startTime;
+	   		output += shindig.endDate + " at " + shindig.endTime;
+	   		output += shindig.details;
+	   		output += shindig.location; 
+  		});
+  		output += "</div>";
+  		//console.log(output); 
+	});
+
+
 }); 
 
 'use strict'
