@@ -98,26 +98,21 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 	});
 
 	shindigdb.once("value", function(snapshot) {
-		var output = "<div>"; 
+		var output = ''; 
+		//$('.output').html('');
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();
-	    	console.log(shindig.name);
-	    	console.log(shindig.type);
-	    	console.log(shindig.host);
-	    	console.log(shindig.startDate + " at " + shindig.startTime);
-	    	console.log(shindig.endDate + " at " + shindig.endTime);
-	    	console.log(shindig.details);
-	    	console.log(shindig.location);
-	   		output += shindig.name;
-	   		output += shindig.type;
-	   		output += shindig.host;
-	   		output += shindig.startDate + " at " + shindig.startTime;
-	   		output += shindig.endDate + " at " + shindig.endTime;
-	   		output += shindig.details;
-	   		output += shindig.location; 
+			output += '<table class = "table table-striped table-bordered">';
+	   		output += '<tr><td>Event Name: </td><td> ' + shindig.name + '</td></tr>';
+	   		output += '<tr><td>Event Type: </td><td> ' + shindig.type + '</td></tr>';
+	   		output += '<tr><td>Event Host: </td><td> ' + shindig.host + '</td></tr>';
+	   		output += '<tr><td>Event Location: </td><td> ' + shindig.location + '</td></tr>';
+	   		output += '<tr><td>Event Start: </td><td> ' + shindig.startDate + ' at ' + shindig.startTime + '</td></tr>';
+	   		output += '<tr><td>Event End: </td><td> ' + shindig.endDate + ' at ' + shindig.endTime + '</td></tr>';
+	   		output += '<tr><td>Event Details: </td><td> ' + shindig.details + '</td></tr>';
+	   		output += '</table>'
   		});
-  		output += "</div>";
-  		//console.log(output); 
+		$('.output').html(output);
 	});
 
 
