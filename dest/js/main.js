@@ -197,11 +197,11 @@ $(function(){
 	function testPassword(password){
 		var result = "pass"; 
 		var output = "<ul>"; 
-		var symbol = new RegExp(/[\!\@\#\$\%\^\&\*]/g,'');
-	    var number = new RegExp(/\d/g,'');
-	    var lowercase = new RegExp(/[a-z]/g,'');
-	    var uppercase = new RegExp(/[A-Z]/g,'');
-    	var illegal = new RegExp(/[^A-z0-9\!\@\#\$\%\^\&\*]/g,'');
+		var symbol = new RegExp(/[\!\@\#\$\%\^\&\*]/g);
+	    var number = new RegExp(/\d/g);
+	    var lowercase = new RegExp(/[a-z]/g);
+	    var uppercase = new RegExp(/[A-Z]/g);
+    	var illegal = new RegExp(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);
 
 		if(password.length < 16 || password.length > 100){
 			output += "<li>Password must be between 16 and 100 characters</li>";
