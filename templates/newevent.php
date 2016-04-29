@@ -69,7 +69,6 @@
 	<span class="glyphicon locationfeedback glyphicon-ok form-control-feedback"></span>
 	<span class= "event-location-msg"></span>
 </div>
-
 <input type = "submit" value = "Let's Party">
 
 

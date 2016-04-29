@@ -32,7 +32,8 @@
 	<span class="glyphicon password2resonse form-control-feedback"></span>
 	<span class ="password2-msg"></span>
 </div>	
-<input type = "submit" value = "Sign Me Up!">
+<a class = "btn btn-primary register-submit" type = "submit">Let's Party</a>
+
 
 </form>
 

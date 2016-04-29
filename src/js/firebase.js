@@ -39,7 +39,6 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 
 	shindigdb.once("value", function(snapshot) {
 		var output = ''; 
-		//$('.output').html('');
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();
 			output += '<table class = "table table-striped table-bordered">';

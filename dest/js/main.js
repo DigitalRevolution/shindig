@@ -99,7 +99,6 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 
 	shindigdb.once("value", function(snapshot) {
 		var output = ''; 
-		//$('.output').html('');
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();
 			output += '<table class = "table table-striped table-bordered">';
@@ -149,6 +148,7 @@ function geolocate() {
 }
 'use strict'
 $(function(){
+	var submit = {};
 	// NAME TEST //
 	function testinput(messageblock, response, id, responsetext){
 		$(messageblock).text(''); 
@@ -157,16 +157,19 @@ $(function(){
 			$(response).addClass('glyphicon-ok'); 
 			$(id).closest('div').removeClass('has-error');
 			$(id).closest('div').addClass('has-success'); 
+			submit.name = true; 
 		} else {
 			$(response).addClass('glyphicon-remove'); 
 			$(id).closest('div').removeClass('has-success'); 
 			$(id).closest('div').addClass('has-error'); 
 			$(messageblock).text(responsetext);
+			submit.name = false; 
 		}
 		$(response).css('visibility', 'visible'); 
+		showSubmit(submit);
 	}
 	// RUN NAME TEST //
-	$('#name').on('focusout', function(){
+	$('#name').bind('keyup blur', function(){
 		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface.');
 	});
 
@@ -176,21 +179,24 @@ $(function(){
 			return regex.test(email); 
 	};	
 	// RUN EMAIL TEST
-	$('#email').on('focusout', function(){
+	$('#email').bind('blur keyup', function(){
 		var email = $('#email').val(); 
-		$('span.emailresponse').text(''); 
+		$('span.email-msg').text(''); 
 		if(isEmail(email) === true){
 			$('span.emailresponse').removeClass('glyphicon-remove'); 
 			$('span.emailresponse').addClass('glyphicon-ok'); 
 			$('#email').closest('div').removeClass('has-error');
 			$('#email').closest('div').addClass('has-success'); 
+			submit.email = true; 
 		} else {
 			$('span.emailresponse').addClass('glyphicon-remove'); 
 			$('#email').closest('div').removeClass('has-success'); 
 			$('#email').closest('div').addClass('has-error'); 
 			$('span.email-msg').text('How am I supposed to get in touch?');
+			submit.email = false; 
 		}; 
-		$('span.emailresponse').css('visibility', 'visible'); 	
+		$('span.emailresponse').css('visibility', 'visible');
+		showSubmit(submit);
 	});
 
 	// PASSWORD ONE TEST //
@@ -237,15 +243,18 @@ $(function(){
 			$('.passwordresonse').addClass('glyphicon-ok'); 
 			$('#password').closest('div').removeClass('has-error');
 			$('#password').closest('div').addClass('has-success'); 
+			submit.pass = true; 
 		} else {
 			$('.passwordresonse').addClass('glyphicon-remove'); 
 			$('#password').closest('div').removeClass('has-success'); 
 			$('#password').closest('div').addClass('has-error'); 
+			submit.pass = false; 
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
+		showSubmit(submit);	
 	};
 	// RUN PASSWORD ONE TEST //
-	$('#password').on('keyup', function(){
+	$('#password').bind('keyup blur', function(){
 		var password = $('#password').val();
 		testPassword(password);
 	})
@@ -265,17 +274,28 @@ $(function(){
 			$('.password2resonse').addClass('glyphicon-ok'); 
 			$('#password2').closest('div').removeClass('has-error');
 			$('#password2').closest('div').addClass('has-success'); 
+			submit.pass2 = true; 
 		} else {
 			$('.password2resonse').addClass('glyphicon-remove'); 
 			$('#password2').closest('div').removeClass('has-success'); 
 			$('#password2').closest('div').addClass('has-error'); 
 			$('span.password2-msg').text('Passwords do not match');
+			submit.pass2 = false; 
 		}
 		$('.password2resonse').css('visibility', 'visible'); 
 	}
-	
 	// RUN PASSWORD TWO TEST
-	$('#password2').on('keyup', function(){
+	$('#password2').bind('keyup blur', function(){
 		testPasswordTwo(); 
+		showSubmit(submit);
 	});
+
+	function showSubmit(submit){
+		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
+			$('.register-submit').css('visibility', 'visible');
+		} else {
+			$('.register-submit').css('visibility', 'hidden');
+		}
+	}
+//    asdfASDF1234!@#$
 });
