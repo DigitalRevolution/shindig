@@ -66,6 +66,11 @@
 			<span class= "event-location-msg"></span>
 		</div>
 
+		<div class="optionalmessage form-group has-feedback">
+			<label class = "control-label" for="optionalmsg">Got anything else to say? (optional)</label>
+				<textarea rows = "4" class="form-control" id="optionalmsg" placeholder = "What else do potential attendees need to know?"></textarea>
+		</div>
+
 		<div class = "text-center"><input class = "btn btn-primary hidden submit-button" type = "submit" value = "Let's Party"></div>
 		</form>
 	</div>

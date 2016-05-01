@@ -82,8 +82,10 @@ var test = {};
 			test.deets === true && 
 			test.location === true) {
 				$('input.submit-button').removeClass('hidden');
+				$('.optionalmessage').addClass('has-success');
 					} else {
 				$('input.submit-button').addClass('hidden');
+				$('.optionalmessage').removeClass('has-success');
 			}
 	});
 });

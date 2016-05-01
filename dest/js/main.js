@@ -82,8 +82,10 @@ var test = {};
 			test.deets === true && 
 			test.location === true) {
 				$('input.submit-button').removeClass('hidden');
+				$('.optionalmessage').addClass('has-success');
 					} else {
 				$('input.submit-button').addClass('hidden');
+				$('.optionalmessage').removeClass('has-success');
 			}
 	});
 });
@@ -108,6 +110,7 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		shindig.endTime = $('#endtime').val();
 		shindig.details = $('#eventdeets').val();
 		shindig.location = $('#location').val();
+		shindig.message = $('#optionalmsg').val();
 
 		shindigdb.push(shindig, function(){
 			$("input[type=text], input[type=date], input[type=time], textarea").val("");
@@ -121,7 +124,7 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		user.email = $('#email').val();
 		user.password = $('#password').val();
 		user.details = $('#memberdeets').val(); 
-		
+
 		usersdb.push(user, function(){
 			window.location = "../";
 		});
