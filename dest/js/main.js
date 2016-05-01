@@ -119,8 +119,9 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		e.preventDefault();
 		user.name = $('#name').val(); 
 		user.email = $('#email').val();
-		user.password = $('#password').val();  
-
+		user.password = $('#password').val();
+		user.details = $('#memberdeets').val(); 
+		
 		usersdb.push(user, function(){
 			window.location = "../";
 		});
@@ -316,12 +317,14 @@ $(function(){
 	});
 
 
-
 	document.onkeyup = function (){
 		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
 			$('.member-submit-button').removeClass('hidden'); 
+			$('div.bioarea').addClass('has-success');
 		} else {
 			$('.member-submit-button').addClass('hidden'); 
+			$('div.bioarea').removeClass('has-success');
+
 		}
 	};
 

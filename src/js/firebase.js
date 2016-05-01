@@ -30,8 +30,9 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		e.preventDefault();
 		user.name = $('#name').val(); 
 		user.email = $('#email').val();
-		user.password = $('#password').val();  
-
+		user.password = $('#password').val();
+		user.details = $('#memberdeets').val(); 
+		
 		usersdb.push(user, function(){
 			window.location = "../";
 		});
