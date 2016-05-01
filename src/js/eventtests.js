@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 $(function(){
 var pass; 
 var test = {}; 
@@ -43,22 +43,31 @@ var test = {};
 		test.host = pass; 
 	});
 	// Start Date / Time
-	$('#startdate').bind('keyup blur', function(){
-		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate');
-		test.sdate = pass; 
-	});
-	$('#starttime').bind('keyup blur', function(){
-		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
-		test.stime = pass; 
+	$('#eventstartdatetime').bind('keyup blur', function(){
+		testinput('span.event-startdt-msg', 'span.startdtresponse', '#eventstartdatetime'); 
+		test.startdt = pass; 
 	});
 	// End Date / Time
-	$('#enddate').bind('keyup blur', function(){
-		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
-		test.edate = pass; 
-	});
-	$('#endtime').bind('keyup blur', function(){
-		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
-		test.etime = pass; 
+	$('#eventenddatetime').bind('keyup blur', function(){
+		var s = moment($('#eventstartdatetime').val()).format('X'); 
+		var e = moment($('#eventenddatetime').val()).format('X');
+		$('span.event-enddt-msg').text('');
+		pass = false; 
+		if($('#eventenddatetime').val() != '' && s < e){ 
+			$('span.enddtresponse').removeClass('glyphicon-remove'); 
+			$('span.enddtresponse').addClass('glyphicon-ok'); 
+			$('#eventenddatetime').closest('div').removeClass('has-error');
+			$('#eventenddatetime').closest('div').addClass('has-success');
+			pass = true;
+		} else {
+			$('span.enddtresponse').addClass('glyphicon-remove'); 
+			$('#eventenddatetime').closest('div').removeClass('has-success'); 
+			$('#eventenddatetime').closest('div').addClass('has-error'); 
+			$('span.event-enddt-msg').text('All good things must end... after they start.');
+			pass = false; 
+		}
+		$('span.enddtresponse').css('visibility', 'visible'); 
+		test.enddt = pass; 
 	});
 	// Event Details
 	$('#eventdeets').bind('keyup blur', function(){
@@ -75,10 +84,8 @@ var test = {};
 		if( test.name === true && 
 			test.type === true && 
 			test.host === true && 
-			test.sdate === true && 
-			test.stime === true && 
-			test.edate === true && 
-			test.etime === true && 
+			test.startdt === true && 
+			test.enddt === true && 
 			test.deets === true && 
 			test.location === true) {
 				$('input.submit-button').removeClass('hidden');

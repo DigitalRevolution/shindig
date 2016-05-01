@@ -19,7 +19,6 @@
 			<span class ="email-msg"></span>
 		</div>	
 
-
 		<div class="form-group has-feedback">
 			<label class = "control-label" for="password">Please Choose A Password</label>
 			<input type="password" class="form-control" id="password" placeholder = "Password" required>

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 $(function(){
 var pass; 
 var test = {}; 
@@ -43,22 +43,31 @@ var test = {};
 		test.host = pass; 
 	});
 	// Start Date / Time
-	$('#startdate').bind('keyup blur', function(){
-		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate');
-		test.sdate = pass; 
-	});
-	$('#starttime').bind('keyup blur', function(){
-		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
-		test.stime = pass; 
+	$('#eventstartdatetime').bind('keyup blur', function(){
+		testinput('span.event-startdt-msg', 'span.startdtresponse', '#eventstartdatetime'); 
+		test.startdt = pass; 
 	});
 	// End Date / Time
-	$('#enddate').bind('keyup blur', function(){
-		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
-		test.edate = pass; 
-	});
-	$('#endtime').bind('keyup blur', function(){
-		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
-		test.etime = pass; 
+	$('#eventenddatetime').bind('keyup blur', function(){
+		var s = moment($('#eventstartdatetime').val()).format('X'); 
+		var e = moment($('#eventenddatetime').val()).format('X');
+		$('span.event-enddt-msg').text('');
+		pass = false; 
+		if($('#eventenddatetime').val() != '' && s < e){ 
+			$('span.enddtresponse').removeClass('glyphicon-remove'); 
+			$('span.enddtresponse').addClass('glyphicon-ok'); 
+			$('#eventenddatetime').closest('div').removeClass('has-error');
+			$('#eventenddatetime').closest('div').addClass('has-success');
+			pass = true;
+		} else {
+			$('span.enddtresponse').addClass('glyphicon-remove'); 
+			$('#eventenddatetime').closest('div').removeClass('has-success'); 
+			$('#eventenddatetime').closest('div').addClass('has-error'); 
+			$('span.event-enddt-msg').text('All good things must end... after they start.');
+			pass = false; 
+		}
+		$('span.enddtresponse').css('visibility', 'visible'); 
+		test.enddt = pass; 
 	});
 	// Event Details
 	$('#eventdeets').bind('keyup blur', function(){
@@ -75,10 +84,8 @@ var test = {};
 		if( test.name === true && 
 			test.type === true && 
 			test.host === true && 
-			test.sdate === true && 
-			test.stime === true && 
-			test.edate === true && 
-			test.etime === true && 
+			test.startdt === true && 
+			test.enddt === true && 
 			test.deets === true && 
 			test.location === true) {
 				$('input.submit-button').removeClass('hidden');
@@ -104,10 +111,8 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		shindig.name = $('#eventname').val();
 		shindig.type = $('#eventtype').val();
 		shindig.host = $('#eventhost').val();
-		shindig.startDate = $('#startdate').val();
-		shindig.startTime = $('#starttime').val();
-		shindig.endDate = $('#enddate').val();
-		shindig.endTime = $('#endtime').val();
+		shindig.startDateTime = $('#eventstartdatetime').val();
+		shindig.endDateTime = $('#eventenddatetime').val();
 		shindig.details = $('#eventdeets').val();
 		shindig.location = $('#location').val();
 		shindig.message = $('#optionalmsg').val();
@@ -134,13 +139,15 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		var output = ''; 
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();
+	    	var startDateTime = moment(shindig.startDateTime).format("dddd, MMMM Do YYYY [at] h:mm:ss a"); 
+	    	var endDateTime = moment(shindig.endDateTime).format("dddd, MMMM Do YYYY [at] h:mm:ss a"); 
 			output += '<table class = "table table-striped table-bordered">';
 	   		output += '<tr><td>Event Name: </td><td> ' + shindig.name + '</td></tr>';
 	   		output += '<tr><td>Event Type: </td><td> ' + shindig.type + '</td></tr>';
 	   		output += '<tr><td>Event Host: </td><td> ' + shindig.host + '</td></tr>';
 	   		output += '<tr><td>Event Location: </td><td> ' + shindig.location + '</td></tr>';
-	   		output += '<tr><td>Event Start: </td><td> ' + shindig.startDate + ' at ' + shindig.startTime + '</td></tr>';
-	   		output += '<tr><td>Event End: </td><td> ' + shindig.endDate + ' at ' + shindig.endTime + '</td></tr>';
+	   		output += '<tr><td>Event Start: </td><td> ' + startDateTime + '</td></tr>';
+	   		output += '<tr><td>Event End: </td><td> ' + endDateTime + '</td></tr>';
 	   		output += '<tr><td>Event Details: </td><td> ' + shindig.details + '</td></tr>';
 	   		output += '</table>'
   		});

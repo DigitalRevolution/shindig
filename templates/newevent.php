@@ -25,31 +25,19 @@
 			<span class="glyphicon whoresponse glyphicon-ok form-control-feedback"></span>
 			<span class= "event-host-msg"></span>
 		</div>
-
-		<div class = "row">
-			<div class="form-group col-md-7" style = "padding-right:0;">
-				<label class = "control-label" for="startdate">Start Date</label>
-				<input type = "date" class="form-control" id="startdate">
-				<span class = "event-stardate-msg"></span>
-			</div>
-			<div class="form-group col-md-5">
-				<label class = "control-label" for="starttime">Start Time</label>
-				<input type = "time" class="form-control" id="starttime">
-				<span class = "event-starttime-msg"></span>
-			</div>
+		
+		<div class="form-group has-feedback">
+			<label class = "control-label" for="eventstartdatetime">What time does the event start?</label>
+			<input type="datetime-local" class="form-control" id="eventstartdatetime" placeholder = "Who's Hosting?">
+			<span class="glyphicon startdtresponse glyphicon-ok form-control-feedback"></span>
+			<span class= "event-startdt-msg"></span>
 		</div>
 
-		<div class = "row">
-			<div class="form-group col-md-7" style = "padding-right:0;">
-				<label class = "control-label" for="enddate">End Date</label>
-				<input type = "date" class="form-control" id="enddate">
-				<span class = "event-enddate-msg"></span>
-			</div>
-			<div class="form-group col-md-5">
-				<label class = "control-label" for="endtime">End Time</label>
-				<input type = "time" class="form-control" id="endtime">
-				<span class = "event-endtime-msg"></span>
-			</div>
+		<div class="form-group has-feedback">
+			<label class = "control-label" for="eventenddatetime">What time does the event end?</label>
+			<input type="datetime-local" class="form-control" id="eventenddatetime" placeholder = "Who's Hosting?">
+			<span class="glyphicon enddtresponse glyphicon-ok form-control-feedback"></span>
+			<span class= "event-enddt-msg"></span>
 		</div>
 
 		<div class="form-group has-feedback">
