@@ -1,21 +1,26 @@
 'use strict'
 $(function(){
+var pass; 
+var test = {}; 
 
 	/* 
 	*** Create a function to interact with users filling out the form. ***
 	*/ 
 	function testinput(messageblock, response, id, responsetext){
-		$(messageblock).text(''); 
+		$(messageblock).text('');
+		pass = false; 
 		if($(id).val() != ''){ 
 			$(response).removeClass('glyphicon-remove'); 
 			$(response).addClass('glyphicon-ok'); 
 			$(id).closest('div').removeClass('has-error');
-			$(id).closest('div').addClass('has-success'); 
+			$(id).closest('div').addClass('has-success');
+			pass = true;
 		} else {
 			$(response).addClass('glyphicon-remove'); 
 			$(id).closest('div').removeClass('has-success'); 
 			$(id).closest('div').addClass('has-error'); 
 			$(messageblock).text(responsetext);
+			pass = false; 
 		}
 		$(response).css('visibility', 'visible'); 
 	}
@@ -23,39 +28,64 @@ $(function(){
 	*** Test the input for every form field on focusout ***
 	*/ 
 	// Event Name
-	$('#eventname').on('focusout', function(){
+	$('#eventname').bind('keyup blur', function(){
 		testinput('span.event-name-msg', 'span.nameresponse', '#eventname', 'Parties need names homie.');
+		test.name = pass;
 	});
 	// Event Type
-	$('#eventtype').on('focusout', function(){
+	$('#eventtype').bind('keyup blur', function(){
 		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'Should I wear my birthday suit?'); 
+		test.type = pass; 
 	});
 	// Event Host
-	$('#eventhost').on('focusout', function(){
+	$('#eventhost').bind('keyup blur', function(){
 		testinput('span.event-host-msg', 'span.whoresponse', '#eventhost', 'Take me to your leader!'); 
+		test.host = pass; 
 	});
 	// Start Date / Time
 	$('#startdate').on('focusout', function(){
-		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate'); 
+		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate');
+		test.sdate = pass; 
 	});
 	$('#starttime').on('focusout', function(){
 		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
+		test.stime = pass; 
 	});
 	// End Date / Time
 	$('#enddate').on('focusout', function(){
 		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
+		test.edate = pass; 
 	});
 	$('#endtime').on('focusout', function(){
 		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
+		test.etime = pass; 
 	});
 	// Event Details
-	$('#eventdeets').on('focusout', function(){
+	$('#eventdeets').bind('keyup blur', function(){
 		testinput('span.event-details-msg', 'span.deetresponse', '#eventdeets', 'Gimme the deets!'); 
+		test.deets = pass; 
 	});
 	// Event Location
-	$('#location').on('focusout', function(){
+	$('#location').bind('keyup blur', function(){
 		testinput('span.event-location-msg', 'span.locationfeedback', '#location', 'Where we goin?'); 
+		test.location = pass;
 	});
+
+	document.onkeyup = function (){
+		if( test.name === true && 
+			test.type === true && 
+			test.host === true && 
+			test.sdate === true && 
+			test.stime === true && 
+			test.edate === true && 
+			test.etime === true && 
+			test.deets === true && 
+			test.location === true) {
+				$('.register-submit').css('visibility', 'visible');
+		} else {
+				$('.register-submit').css('visibility', 'hidden');
+		}
+	};
 
 });
 'use strict';
@@ -97,7 +127,7 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		});
 	});
 
-	shindigdb.once("value", function(snapshot) {
+	shindigdb.orderByChild("startDate").limitToFirst(3).once("value", function(snapshot) {
 		var output = ''; 
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();
@@ -166,11 +196,11 @@ $(function(){
 			submit.name = false; 
 		}
 		$(response).css('visibility', 'visible'); 
-		showSubmit(submit);
+		// showSubmit(submit);
 	}
 	// RUN NAME TEST //
 	$('#name').bind('keyup blur', function(){
-		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface.');
+		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface. ;)');
 	});
 
 	// EMAIL TEST //
@@ -192,11 +222,11 @@ $(function(){
 			$('span.emailresponse').addClass('glyphicon-remove'); 
 			$('#email').closest('div').removeClass('has-success'); 
 			$('#email').closest('div').addClass('has-error'); 
-			$('span.email-msg').text('How am I supposed to get in touch?');
+			$('span.email-msg').text('We won\'t spam you, we promise');
 			submit.email = false; 
 		}; 
 		$('span.emailresponse').css('visibility', 'visible');
-		showSubmit(submit);
+		// showSubmit(submit);
 	});
 
 	// PASSWORD ONE TEST //
@@ -210,11 +240,11 @@ $(function(){
     	var illegal = new RegExp(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);
 
 		if(password.length < 16 || password.length > 100){
-			output += "<li>Password must be between 16 and 100 characters</li>";
+			output += "<li>Password must be between 16 and 100 characters.</li>";
 			result = "fail"; 
 		} 
     	if(!symbol.test(password)){
-    		output += "<li>Password must contain at least one special character ( ! @ # $ % ^ & * )</li>";
+    		output += "<li>Password must contain at least one special character ( ! @ # $ % ^ & * ).</li>";
     		result = "fail"; 
     	}
     	if(!number.test(password)){
@@ -251,7 +281,7 @@ $(function(){
 			submit.pass = false; 
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
-		showSubmit(submit);	
+		// showSubmit(submit);	
 	};
 	// RUN PASSWORD ONE TEST //
 	$('#password').bind('keyup blur', function(){
@@ -287,8 +317,16 @@ $(function(){
 	// RUN PASSWORD TWO TEST
 	$('#password2').bind('keyup blur', function(){
 		testPasswordTwo(); 
-		showSubmit(submit);
+		// showSubmit(submit);
 	});
+
+	document.onkeyup = function (){
+		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
+			$('.register-submit').css('visibility', 'visible');
+		} else {
+			$('.register-submit').css('visibility', 'hidden');
+		}
+	};
 
 	function showSubmit(submit){
 		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){

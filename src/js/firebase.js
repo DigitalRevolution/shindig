@@ -37,7 +37,7 @@ var usersdb = new Firebase('https://shindig.firebaseio.com/users');
 		});
 	});
 
-	shindigdb.once("value", function(snapshot) {
+	shindigdb.orderByChild("startDate").limitToFirst(3).once("value", function(snapshot) {
 		var output = ''; 
 	  	snapshot.forEach(function(childSnapshot) {
 	    	var shindig = childSnapshot.val();

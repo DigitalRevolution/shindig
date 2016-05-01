@@ -18,11 +18,11 @@ $(function(){
 			submit.name = false; 
 		}
 		$(response).css('visibility', 'visible'); 
-		showSubmit(submit);
+		// showSubmit(submit);
 	}
 	// RUN NAME TEST //
 	$('#name').bind('keyup blur', function(){
-		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface.');
+		testinput('span.name-msg', 'span.newnameresponse', '#name', 'Hey, whatsyerface. ;)');
 	});
 
 	// EMAIL TEST //
@@ -44,11 +44,11 @@ $(function(){
 			$('span.emailresponse').addClass('glyphicon-remove'); 
 			$('#email').closest('div').removeClass('has-success'); 
 			$('#email').closest('div').addClass('has-error'); 
-			$('span.email-msg').text('How am I supposed to get in touch?');
+			$('span.email-msg').text('We won\'t spam you, we promise');
 			submit.email = false; 
 		}; 
 		$('span.emailresponse').css('visibility', 'visible');
-		showSubmit(submit);
+		// showSubmit(submit);
 	});
 
 	// PASSWORD ONE TEST //
@@ -62,11 +62,11 @@ $(function(){
     	var illegal = new RegExp(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);
 
 		if(password.length < 16 || password.length > 100){
-			output += "<li>Password must be between 16 and 100 characters</li>";
+			output += "<li>Password must be between 16 and 100 characters.</li>";
 			result = "fail"; 
 		} 
     	if(!symbol.test(password)){
-    		output += "<li>Password must contain at least one special character ( ! @ # $ % ^ & * )</li>";
+    		output += "<li>Password must contain at least one special character ( ! @ # $ % ^ & * ).</li>";
     		result = "fail"; 
     	}
     	if(!number.test(password)){
@@ -103,7 +103,7 @@ $(function(){
 			submit.pass = false; 
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
-		showSubmit(submit);	
+		// showSubmit(submit);	
 	};
 	// RUN PASSWORD ONE TEST //
 	$('#password').bind('keyup blur', function(){
@@ -139,8 +139,16 @@ $(function(){
 	// RUN PASSWORD TWO TEST
 	$('#password2').bind('keyup blur', function(){
 		testPasswordTwo(); 
-		showSubmit(submit);
+		// showSubmit(submit);
 	});
+
+	document.onkeyup = function (){
+		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
+			$('.register-submit').css('visibility', 'visible');
+		} else {
+			$('.register-submit').css('visibility', 'hidden');
+		}
+	};
 
 	function showSubmit(submit){
 		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
