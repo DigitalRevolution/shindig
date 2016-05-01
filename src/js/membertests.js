@@ -18,7 +18,6 @@ $(function(){
 			submit.name = false; 
 		}
 		$(response).css('visibility', 'visible'); 
-		// showSubmit(submit);
 	}
 	// RUN NAME TEST //
 	$('#name').bind('keyup blur', function(){
@@ -48,7 +47,6 @@ $(function(){
 			submit.email = false; 
 		}; 
 		$('span.emailresponse').css('visibility', 'visible');
-		// showSubmit(submit);
 	});
 
 	// PASSWORD ONE TEST //
@@ -103,7 +101,6 @@ $(function(){
 			submit.pass = false; 
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
-		// showSubmit(submit);	
 	};
 	// RUN PASSWORD ONE TEST //
 	$('#password').bind('keyup blur', function(){
@@ -139,23 +136,17 @@ $(function(){
 	// RUN PASSWORD TWO TEST
 	$('#password2').bind('keyup blur', function(){
 		testPasswordTwo(); 
-		// showSubmit(submit);
 	});
+
+
 
 	document.onkeyup = function (){
 		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
-			$('.register-submit').css('visibility', 'visible');
+			$('.member-submit-button').removeClass('hidden'); 
 		} else {
-			$('.register-submit').css('visibility', 'hidden');
+			$('.member-submit-button').addClass('hidden'); 
 		}
 	};
 
-	function showSubmit(submit){
-		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
-			$('.register-submit').css('visibility', 'visible');
-		} else {
-			$('.register-submit').css('visibility', 'hidden');
-		}
-	}
 //    asdfASDF1234!@#$
 });

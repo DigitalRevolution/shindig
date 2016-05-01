@@ -66,10 +66,9 @@
 			<span class= "event-location-msg"></span>
 		</div>
 
-		<input class = "btn btn-primary register-submit" type = "submit" value = "Let's Party">
+		<div class = "text-center"><input class = "btn btn-primary hidden submit-button" type = "submit" value = "Let's Party"></div>
 		</form>
 	</div>
 	<div class = "col-md-3"></div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhEvi1ghIVk_3yQZElcWLblzpMpAH2Ios&libraries=places&callback=initAutocomplete" async defer></script>
 <?php include('./footer.html'); ?>

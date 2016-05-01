@@ -34,7 +34,7 @@ var test = {};
 	});
 	// Event Type
 	$('#eventtype').bind('keyup blur', function(){
-		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'Should I wear my birthday suit?'); 
+		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'I need to decide what to wear...'); 
 		test.type = pass; 
 	});
 	// Event Host
@@ -43,20 +43,20 @@ var test = {};
 		test.host = pass; 
 	});
 	// Start Date / Time
-	$('#startdate').on('focusout', function(){
+	$('#startdate').bind('keyup blur', function(){
 		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate');
 		test.sdate = pass; 
 	});
-	$('#starttime').on('focusout', function(){
+	$('#starttime').bind('keyup blur', function(){
 		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
 		test.stime = pass; 
 	});
 	// End Date / Time
-	$('#enddate').on('focusout', function(){
+	$('#enddate').bind('keyup blur', function(){
 		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
 		test.edate = pass; 
 	});
-	$('#endtime').on('focusout', function(){
+	$('#endtime').bind('keyup blur', function(){
 		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
 		test.etime = pass; 
 	});
@@ -71,7 +71,7 @@ var test = {};
 		test.location = pass;
 	});
 
-	document.onkeyup = function (){
+	$(document).bind('keyup change', function(){
 		if( test.name === true && 
 			test.type === true && 
 			test.host === true && 
@@ -81,10 +81,9 @@ var test = {};
 			test.etime === true && 
 			test.deets === true && 
 			test.location === true) {
-				$('.register-submit').css('visibility', 'visible');
-		} else {
-				$('.register-submit').css('visibility', 'hidden');
-		}
-	};
-
+				$('input.submit-button').removeClass('hidden');
+					} else {
+				$('input.submit-button').addClass('hidden');
+			}
+	});
 });

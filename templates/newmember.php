@@ -4,7 +4,7 @@
 	<div class = "col-xs-12 col-md-4 content">
 
 		<form autocomplete = "on" action="" id = "newUser">
-		
+
 		<div class="form-group has-feedback">
 			<label class = "control-label" for="name">What's Your Name?</label>
 			<input type="text" class="form-control" id="name" placeholder = "Name" autofocus required>
@@ -33,8 +33,7 @@
 			<span class="glyphicon password2resonse form-control-feedback"></span>
 			<span class ="password2-msg"></span>
 		</div>	
-		<div class = "text-center"><input class = "btn btn-primary register-submit" type = "submit" value = "Sign Me Up"></div>
-
+		<div class = "text-center"><input class = "btn btn-primary hidden member-submit-button" type = "submit" value = "Sign Me Up"></div>
 		</form>
 
 	</div>

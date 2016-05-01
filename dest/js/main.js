@@ -34,7 +34,7 @@ var test = {};
 	});
 	// Event Type
 	$('#eventtype').bind('keyup blur', function(){
-		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'Should I wear my birthday suit?'); 
+		testinput('span.event-type-msg', 'span.typeresponse', '#eventtype', 'I need to decide what to wear...'); 
 		test.type = pass; 
 	});
 	// Event Host
@@ -43,20 +43,20 @@ var test = {};
 		test.host = pass; 
 	});
 	// Start Date / Time
-	$('#startdate').on('focusout', function(){
+	$('#startdate').bind('keyup blur', function(){
 		testinput('span.event-startdate-msg', 'span.startdateresponse', '#startdate');
 		test.sdate = pass; 
 	});
-	$('#starttime').on('focusout', function(){
+	$('#starttime').bind('keyup blur', function(){
 		testinput('span.event-starttime-msg', 'span.starttimeresponse', '#starttime'); 
 		test.stime = pass; 
 	});
 	// End Date / Time
-	$('#enddate').on('focusout', function(){
+	$('#enddate').bind('keyup blur', function(){
 		testinput('span.event-enddate-msg', 'span.enddateresponse', '#enddate'); 
 		test.edate = pass; 
 	});
-	$('#endtime').on('focusout', function(){
+	$('#endtime').bind('keyup blur', function(){
 		testinput('span.event-endtime-msg', 'span.endtimeresponse', '#endtime'); 
 		test.etime = pass; 
 	});
@@ -71,7 +71,7 @@ var test = {};
 		test.location = pass;
 	});
 
-	document.onkeyup = function (){
+	$(document).bind('keyup change', function(){
 		if( test.name === true && 
 			test.type === true && 
 			test.host === true && 
@@ -81,12 +81,11 @@ var test = {};
 			test.etime === true && 
 			test.deets === true && 
 			test.location === true) {
-				$('.register-submit').css('visibility', 'visible');
-		} else {
-				$('.register-submit').css('visibility', 'hidden');
-		}
-	};
-
+				$('input.submit-button').removeClass('hidden');
+					} else {
+				$('input.submit-button').addClass('hidden');
+			}
+	});
 });
 'use strict';
 $(function(){
@@ -196,7 +195,6 @@ $(function(){
 			submit.name = false; 
 		}
 		$(response).css('visibility', 'visible'); 
-		// showSubmit(submit);
 	}
 	// RUN NAME TEST //
 	$('#name').bind('keyup blur', function(){
@@ -226,7 +224,6 @@ $(function(){
 			submit.email = false; 
 		}; 
 		$('span.emailresponse').css('visibility', 'visible');
-		// showSubmit(submit);
 	});
 
 	// PASSWORD ONE TEST //
@@ -281,7 +278,6 @@ $(function(){
 			submit.pass = false; 
 		}
 		$('.passwordresonse').css('visibility', 'visible'); 
-		// showSubmit(submit);	
 	};
 	// RUN PASSWORD ONE TEST //
 	$('#password').bind('keyup blur', function(){
@@ -317,23 +313,17 @@ $(function(){
 	// RUN PASSWORD TWO TEST
 	$('#password2').bind('keyup blur', function(){
 		testPasswordTwo(); 
-		// showSubmit(submit);
 	});
+
+
 
 	document.onkeyup = function (){
 		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
-			$('.register-submit').css('visibility', 'visible');
+			$('.member-submit-button').removeClass('hidden'); 
 		} else {
-			$('.register-submit').css('visibility', 'hidden');
+			$('.member-submit-button').addClass('hidden'); 
 		}
 	};
 
-	function showSubmit(submit){
-		if(submit.name === true && submit.email === true && submit.pass && submit.pass2){
-			$('.register-submit').css('visibility', 'visible');
-		} else {
-			$('.register-submit').css('visibility', 'hidden');
-		}
-	}
 //    asdfASDF1234!@#$
 });
